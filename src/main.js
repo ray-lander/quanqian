@@ -4,8 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-Vue.config.productionTip = false
+import WeuiVue from 'weui-vue'
+import 'weui-vue/weui.css'
+import './lib/iconfont/iconfont.css'
+import './lib/base.css'
 
+Vue.use(WeuiVue)
+
+Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
