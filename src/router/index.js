@@ -38,8 +38,8 @@ export default new Router({
         { path: '/index/profile/sendtaskmanagement', name: 'SendtaskManagement', component: SendtaskManagement },
 
       ]
-
     }, 
+    // { path: '/index', redirect: '/index/moments/momentslist' },
 
   ],
   linkActiveClass: 'weui-bar__item_on'

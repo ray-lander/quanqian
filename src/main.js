@@ -4,12 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import FastClick from 'fastclick' //使用 fastclick 解决移动端 300ms 点击延迟
 import WeuiVue from 'weui-vue'
 import 'weui-vue/weui.css'
+Vue.use(WeuiVue)
 import './lib/iconfont/iconfont.css'
 import './lib/base.css'
+import './filter/data'
 
-Vue.use(WeuiVue)
+FastClick.attach(document.body)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */

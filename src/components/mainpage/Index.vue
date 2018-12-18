@@ -37,7 +37,6 @@ export default {
 
 <style>
 #index_page {
-  height: 100%;
   width: 100%;
   padding-top: 50px;
   padding-bottom: 50px;
@@ -46,5 +45,29 @@ export default {
 .weui-navbar__item.weui-bar__item_on {
   background-color: #2B2A30;
   color: #fff;
+}
+.weui-navbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    z-index: 500;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #FAFAFA;
+    right: 0;
+}
+.weui-tabbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    z-index: 500;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #F7F7FA;
+    right: 0;
 }
 </style>
