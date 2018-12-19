@@ -4,7 +4,7 @@
 		<div class="release_header clearfix">
 			<div class="fl user_img">
 				<input type="checkbox">
-				<img src="../../assets/img/666.jpg" alt>
+				<img  src="../../assets/img/666.jpg" alt>
 				<p>西西妹</p>
 			</div>
 			<div class="fl user_img">
@@ -55,63 +55,132 @@
 		</div>
 		<!-- 发布按钮 -->
 		<div class="news_btn clearfix">
+			<!-- 延时按钮 -->
 			<a
 				href="javascript:;"
 				@click="this.changedelayFlag"
-				class="weui-btn fl weui-btn_plain-primary delay_send"
+				class="weui-btn fl delay_send"
+				:class="{'weui-btn_plain-primary':clickOn,'weui-btn_primary':clickOver}"
 			>延时发送到朋友圈</a>
+			<!-- 立即发送按钮 -->
 			<a
 				href="javascript:;"
 				@click="this.changenowFlag"
-				class="weui-btn fl weui-btn_plain-primary now_send"
+				class="weui-btn fl now_send"
+				:class="{'weui-btn_plain-primary':clickOver,'weui-btn_primary':clickOn}"
 			>立即发送到朋友圈</a>
 		</div>
-		<!-- 选择延时发送 -->
+		<!-- 选择延时发送盒子 -->
 		<div v-show="delayFlag" class="weui-cells weui-cells_checkbox">
-			<p>
-				<input type="checkbox">
+			<p class="check_row" @click="showCheck=!showCheck">
+				<input type="checkbox" :checked="showCheck">
 				<span>延时评论</span>
 			</p>
-			<div class="now_news">
+			<div class="now_news" v-show="showCheck">
 				<textarea name id placeholder="这一刻的想法......"></textarea>
 				<p>朋友圈发送成功后15s发送评论</p>
 			</div>
-			<p>
-				<input type="checkbox">
+			<p class="check_row" @click="showChecktwo=!showChecktwo">
+				<input type="checkbox" :checked="showChecktwo">
 				<span>延时点赞</span>
 			</p>
-			<div class="delay_news">
+			<div class="delay_news" v-show="showChecktwo">
 				<p>朋友圈发送成功后15s内点赞</p>
 			</div>
 		</div>
-		<!-- 选择立即发送 -->
-		<div v-show="nowFlag" class="weui-cells weui-cells_checkbox">
-			<div class="now_news">
-				<textarea name id placeholder="这一刻的想法......"></textarea>
-				<p>朋友圈发送成功后15s发送评论</p>
+		<!-- 立即发送盒子 -->
+		<div v-show="nowFlag" class="weui-cells now_send_box weui-cells_checkbox">
+			<!-- 一 选择发送时间 -->
+			<div class="send_time">
+				<div class="now_tit">发送时间</div>
+				<div class="time_row">
+					<div class="now_tit" @click="this.userDefindFn">
+						<input type="checkbox" :checked="userDefind" :disabled="reComment">
+						<span :class="[reComment?'readonly':'']">自定义时间</span>
+					</div>
+					<div class="time_box" :class="[reComment?'readonly':'']" @click="openPicker">{{pickerValue | date}}</div>
+				</div>
+				
+				<div class="time_row" >
+					<div class="now_tit" @click="reCommentFn">
+						<input type="checkbox" :checked="reComment" :disabled="userDefind">
+						<span :class="[userDefind?'readonly':'']">推荐时间</span>
+					</div>
+					<div class="time_chioce clearfix">
+						<input class="time_one" :class="[userDefind?'readonly':'']" type="text" value="07:00-08:30" readonly="readonly">
+						<input class="time_two" :class="[userDefind?'readonly':'']" type="text" value="11:00-13:30" readonly="readonly">
+						<input class="time_three" :class="[userDefind?'readonly':'']" type="text" value="17:00-19:30" readonly="readonly">
+						<input class="time_four" :class="[userDefind?'readonly':'']" type="text" value="21:00-22:30" readonly="readonly">
+					</div>
+				</div>
 			</div>
-
-			<div class="delay_news">
-				<p>朋友圈发送成功后15s内点赞</p>
+			<!-- 二 延时评论 -->
+			<div class="delay_comment">
+				<div class="now_tit" @click="delayComments=!delayComments">
+					<input type="checkbox" :checked="delayComments">
+					<span>延时评论</span>
+				</div>
+				<div class="now_news" v-show="delayComments">
+					<textarea placeholder="这一刻的想法......"></textarea>
+					<div class="now_tit" @click="randomDelay=!randomDelay">
+						<input type="checkbox" :checked="randomDelay">
+						<span :class="[!randomDelay?'readonly':'']">随机延时（朋友圈点赞的15s）</span>
+					</div>
+					<div class="now_tit" @click="randomDelay=!randomDelay">
+						<input type="checkbox" :checked="!randomDelay">
+						<span :class="[randomDelay?'readonly':'']">统一延时3s</span>
+					</div>
+				</div>
+			</div>
+			<!-- 三 延时点赞 -->
+			<div class="delay_love">
+				<div class="now_tit" @click="delayLike=!delayLike">
+					<input type="checkbox" :checked="delayLike">
+					<span>延时点赞</span>
+				</div>
+				<div class="now_news" v-show="delayLike">
+					<div class="now_tit"  @click="randomLike=!randomLike">
+						<input type="checkbox" :checked="randomLike">
+						<span :class="[!randomLike?'readonly':'']">随机点赞（朋友圈点赞的15s）</span>
+					</div>
+					<div class="now_tit"  @click="randomLike=!randomLike">
+						<input type="checkbox" :checked="!randomLike">
+						<span :class="[randomLike?'readonly':'']">统一延时3s</span>
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<div class="sub_btn">
 			<a href="javascript:;" class="weui-btn weui-btn_plain-primary">确认发送</a>
 		</div>
+		<mt-datetime-picker ref="picker" type="datetime" v-model="pickerValue"></mt-datetime-picker>
 	</div>
 </template>
 <script>
 	import $ from "jquery/dist/jquery.min";
-
+	import "mint-ui/lib/style.css";
 	export default {
 		name: "ReleaseNew",
 		data() {
 			return {
 				delayFlag: true,
-				nowFlag: false
+				nowFlag: false,
+				clickOn: false,
+				clickOver: true,
+				showCheck: false,
+				showChecktwo: false,
+				pickerValue: null,
+				delayComments: false,
+				delayLike: false,
+				// 自动勾选
+				userDefind: true,
+				reComment: false,
+				randomDelay: true,
+				randomLike: true,
 			};
 		},
+
 		methods: {
 			initUploader() {
 				var tmpl =
@@ -157,10 +226,44 @@
 			changedelayFlag() {
 				this.delayFlag = true;
 				this.nowFlag = false;
+				this.clickOn = false;
+				this.clickOver = true;
 			},
 			changenowFlag() {
 				this.nowFlag = true;
 				this.delayFlag = false;
+				this.clickOn = true;
+				this.clickOver = false;
+			},
+			openPicker() {
+				if(this.reComment){
+					return
+				}
+				this.$refs.picker.open();
+			},
+			userDefindFn(){
+				if(this.reComment){
+					return
+				}
+				this.userDefind = !this.userDefind
+				if(this.userDefind == false){
+					this.reComment = true
+				}else {
+					this.reComment = false
+					this.delayComments = false
+					this.delayLike = false
+				}
+			},
+			reCommentFn(){
+				if(this.userDefind == true){
+					return
+				}
+				this.reComment = !this.reComment
+				if(this.reComment == false){
+					this.userDefind = true
+				}else {
+					this.userDefind = false
+				}
 			}
 		},
 		mounted() {
@@ -189,7 +292,7 @@
 				width: 1.25rem;
 				height: 1.25rem;
 				position: absolute;
-				opacity: 0.8;
+				opacity: 0.9;
 				top: -0.0625rem;
 				left: 0.5625rem;
 			}
@@ -208,8 +311,31 @@
 		textarea {
 			width: 100%;
 			border: 1px solid #ccc;
-			height: 115px;
+			height: 7.1875rem;
 		}
+	}
+
+	.now_send_box {
+		padding: 0.625rem;
+		.now_news {
+			padding: 0.3125rem 1.625rem;
+		}
+	}
+	.now_tit {
+		height: 30px;
+		width: 100%;
+		padding: 0 10px;
+		line-height: 30px;
+		box-sizing: border-box;
+	}
+	.time_row {
+		width: 85%;
+		margin: 0 auto;
+		// &.read_only {
+		// 	input {
+
+		// 	}
+		// }
 	}
 	.sub_btn {
 		padding: 10px 60px;
@@ -246,5 +372,34 @@
 		color: #c9c9c9;
 		font-size: 23px;
 		display: block;
+	}
+	.check_row {
+		padding: 0.3125rem 0.625rem;
+	}
+	.time_box {
+		height: 26px;
+		width: 77%;
+		border: 1px solid #ccc;
+		margin: 0 auto;
+		border-radius: 3px;
+		margin-top: 3px;
+		margin-bottom: 3px;
+	}
+	.time_chioce {
+		input {
+			// display: block;
+			// float: left;
+			width: 45%;
+			text-align: center;
+			margin: 3px 5px;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			padding: 3px 0;
+		}
+	}
+	input.readonly,
+	span.readonly,
+	.time_box.readonly {
+		color: #ccc;
 	}
 </style>
