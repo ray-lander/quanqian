@@ -28,7 +28,6 @@
 </template>
 <script>
 	// import "../../lib/base.css"
-	import "../../lib/rem.js";
 	export default {
 		name: "Nav"
 	};

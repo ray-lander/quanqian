@@ -159,7 +159,7 @@
 </template>
 <script>
 	import $ from "jquery/dist/jquery.min";
-	import "mint-ui/lib/style.css";
+	
 	export default {
 		name: "ReleaseNew",
 		data() {

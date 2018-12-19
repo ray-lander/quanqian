@@ -7,6 +7,8 @@ import Login from '@/components/login/Login'
 import ForgetPassword from '@/components/login/ForgetPassword'
 import MomentsList from '@/components/moments/MomentsList'
 import FriendsList from '@/components/moments/FriendsList'
+
+import RelayMoments from '@/components/moments/RelayMoments'
 import ReleaseNew from '@/components/release/releasenew'
 import MyCollection from '@/components/materialcollection/MyCollection'
 import MainProfile from '@/components/profile/MainProfile'
@@ -29,6 +31,7 @@ export default new Router({
         // 朋友圈
         { path: '/index/moments/momentslist', name: 'MomentsList', component: MomentsList },
         { path: '/index/moments/friendslist', name: 'FriendsList', component: FriendsList },
+        { path: '/index/moments/relaymoments', name: 'RelayMoments', component: RelayMoments },
         // 发布
         { path: '/index/release/releasenew', name: 'ReleaseNew', component: ReleaseNew },
         //素材
