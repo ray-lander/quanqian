@@ -116,9 +116,9 @@
 			</div>
 			<!-- 二 延时评论 -->
 			<div class="delay_comment">
-				<div class="now_tit" @click="delayComments=!delayComments">
-					<input type="checkbox" :checked="delayComments">
-					<span>延时评论</span>
+				<div class="now_tit" @click="this.delayCommentsFn">
+					<input type="checkbox" :checked="delayComments" :disabled="userDefind">
+					<span :class="[userDefind?'readonly':'']">延时评论</span>
 				</div>
 				<div class="now_news" v-show="delayComments">
 					<textarea placeholder="这一刻的想法......"></textarea>
@@ -134,9 +134,9 @@
 			</div>
 			<!-- 三 延时点赞 -->
 			<div class="delay_love">
-				<div class="now_tit" @click="delayLike=!delayLike">
-					<input type="checkbox" :checked="delayLike">
-					<span>延时点赞</span>
+				<div class="now_tit" @click="this.delayLikeFn">
+					<input type="checkbox" :checked="delayLike" :disabled="userDefind">
+					<span  :class="[userDefind?'readonly':'']">延时点赞</span>
 				</div>
 				<div class="now_news" v-show="delayLike">
 					<div class="now_tit"  @click="randomLike=!randomLike">
@@ -241,6 +241,7 @@
 				}
 				this.$refs.picker.open();
 			},
+			// 自定义时间
 			userDefindFn(){
 				if(this.reComment){
 					return
@@ -254,8 +255,9 @@
 					this.delayLike = false
 				}
 			},
+			// 推荐时间
 			reCommentFn(){
-				if(this.userDefind == true){
+				if(this.userDefind){
 					return
 				}
 				this.reComment = !this.reComment
@@ -264,7 +266,21 @@
 				}else {
 					this.userDefind = false
 				}
+			},
+			delayCommentsFn(){
+				// console.log(this.userDefind)
+				if(this.userDefind){
+					return
+				}
+				this.delayComments = !this.delayComments
+			},
+			delayLikeFn(){
+				if(this.userDefind){
+					return
+				}
+				this.delayLike = !this.delayLike
 			}
+
 		},
 		mounted() {
 			this.initUploader();

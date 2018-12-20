@@ -1,15 +1,28 @@
 <template>
 	<div class="header_page">
-		<div class="weui-navbar">
-			<div class="weui-navbar__item weui-bar__item_on">圈钱宝</div>
-		</div>
+	
+		<mt-header fixed title="圈钱宝">
+			<a
+				href="javascript:;"
+				slot="left"
+				@click="$router.go(-1)"
+				v-show="show_back.indexOf($route.name) == -1"
+			>
+				<span class="iconfont icon-tubiaozhizuo-"></span>
+			</a>
+		</mt-header>
 	</div>
 </template>
 <script>
 	export default {
-		name: "Header"
+		name: "Header",
+		data() {
+			return {
+				show_back: ['MomentsList','ReleaseNew','MyCollection','MainProfile']
+			};
+		}
+	
 	};
 </script>
 <style>
-	
 </style>

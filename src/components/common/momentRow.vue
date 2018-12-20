@@ -1,5 +1,8 @@
 <template>
-	<div>
+	<div class="moments">
+		<!-- <div class="check_this">
+			<input type="checkbox">
+		</div> -->
 		<!-- PhotoSwipe插件需要的元素， 一定要有类名 pswp -->
 		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="pswp__bg"></div>
@@ -148,13 +151,12 @@
 	import "photoswipe/dist/photoswipe.css";
 	import "photoswipe/dist/default-skin/default-skin.css";
 	export default {
-    data() {
-				return {
-					actionBtn: false
-				}
-			},
+		data() {
+			return {
+				actionBtn: false
+			};
+		},
 		methods: {
-			
 			initPhotoSwipeFromDOM(gallerySelector) {
 				var parseThumbnailElements = function(el) {
 					// console.log(el)
@@ -320,10 +322,21 @@
 	};
 </script>
 <style lang="less" scoped>
-	#moments {
+	// .check_this {
+	// 	position: relative;
+	// 	input {
+	// 		position: absolute;
+	// 		top: 22px;
+	// 		left: 5px;
+	// 		z-index: 2;
+	// 		width: 20px;
+	// 		height: 20px;
+	// 	}
+	// }
+	.moments {
 		position: relative;
 	}
-	#moments .drag-reflash {
+	.moments .drag-reflash {
 		position: absolute;
 		left: 20px;
 		top: -40px;
@@ -334,38 +347,39 @@
 		background-size: contain;
 	}
 
-	#moments .home-content {
+	.moments .home-content {
 		padding-top: 45px;
 		min-height: 500px;
 	}
 
-	#moments .moments__post {
+	.moments .moments__post {
 		background: #fff;
 		display: block;
 		border-bottom: 1px solid #f2eeee;
+		// padding-left: 30px;
 	}
 
-	#moments .moments__post::before {
+	.moments .moments__post::before {
 		content: none;
 	}
 
-	#moments .moments__post .weui-cell__hd {
+	.moments .moments__post .weui-cell__hd {
 		display: table-cell;
 		vertical-align: top;
 		min-width: 45px;
 	}
 
-	#moments .moments__post .weui-cell__hd img {
+	.moments .moments__post .weui-cell__hd img {
 		width: 45px !important;
 	}
 
-	#moments .moments__post .weui-cell__bd {
+	.moments .moments__post .weui-cell__bd {
 		font-size: 15px;
 		display: table-cell;
 		padding-left: 10px;
 	}
 
-	#moments .moments__post .weui-cell__bd .paragraphExtender {
+	.moments .moments__post .weui-cell__bd .paragraphExtender {
 		margin: 5px auto;
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -373,11 +387,11 @@
 		display: flex;
 	}
 
-	#moments .moments__post .title {
+	.moments .moments__post .title {
 		color: #094dcc;
 	}
 
-	#moments .moments__post .thumbnails {
+	.moments .moments__post .thumbnails {
 		width: 100%;
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -388,7 +402,7 @@
 		flex-wrap: wrap;
 	}
 
-	#moments .moments__post .thumbnails .thumbnail {
+	.moments .moments__post .thumbnails .thumbnail {
 		width: 80px;
 		height: 80px;
 		margin: 3px;
@@ -397,12 +411,12 @@
 		overflow: hidden;
 	}
 
-	#moments .moments__post .thumbnails .thumbnail img {
+	.moments .moments__post .thumbnails .thumbnail img {
 		width: 100%;
 		height: 100%;
 	}
 
-	#moments .moments__post .toolbar {
+	.moments .moments__post .toolbar {
 		position: relative;
 		display: -webkit-box;
 		display: -webkit-flex;
@@ -415,14 +429,14 @@
 		height: 28px;
 	}
 
-	#moments .moments__post .timestamp {
+	.moments .moments__post .timestamp {
 		color: #757575;
 		height: 30px;
 		line-height: 30px;
 		font-size: 15px;
 	}
 
-	#moments .moments__post .actionMenu {
+	.moments .moments__post .actionMenu {
 		position: absolute;
 		height: 30px;
 		width: 200px;
@@ -446,7 +460,7 @@
 		}
 	}
 
-	#moments .moments__post .actionToggle {
+	.moments .moments__post .actionToggle {
 		width: 15px;
 		height: 15px;
 		// background: #92abd4;
@@ -468,7 +482,7 @@
 		justify-content: center;
 	}
 
-	#moments .moments__post .liketext {
+	.moments .moments__post .liketext {
 		margin-top: 5px;
 		width: 100%;
 		background-color: #f3f3f5;
@@ -488,7 +502,7 @@
 	.comment_list {
 		background-color: #f3f3f5;
 	}
-	#moments .moments__post .liketext .nickname {
+	.moments .moments__post .liketext .nickname {
 		color: #094dcc;
 		font-size: 13px;
 	}
@@ -499,7 +513,7 @@
 		transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 	}
 	.slide-fade-enter, .slide-fade-leave-to
-	/* .slide-fade-leave-active for below version 2.1.8 */ {
+		/* .slide-fade-leave-active for below version 2.1.8 */ {
 		transform: translateX(10px);
 		opacity: 0;
 	}

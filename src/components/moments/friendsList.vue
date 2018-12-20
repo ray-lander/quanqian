@@ -2,7 +2,7 @@
 	<div class="friends_page">
 		<mt-index-list>
 			<mt-index-section index="A">
-				<mt-cell title="Aaron"></mt-cell>
+				<mt-cell title="Aaron" @click.native="goPage('/index/moments/personalmoments')"></mt-cell>
 				<mt-cell title="Alden"></mt-cell>
 				<mt-cell title="Austin"></mt-cell>
 			</mt-index-section>
@@ -20,9 +20,19 @@
 <script>
 	export default {
 		name: "FriendsList",
-		data(){
+		data() {
 			return {
-				
+				id: 11
+			};
+		},
+		methods: {
+			goPage(path) {
+				this.$router.push({
+					path: path,
+					query: {
+						id: this.id
+					}
+				});
 			}
 		}
 	};

@@ -12,11 +12,13 @@ import './lib/iconfont/iconfont.css'
 import './lib/base.css'
 import './lib/rem'
 import './filter/data'
-import { DatetimePicker, IndexList, IndexSection, Cell} from "mint-ui";
+import { DatetimePicker, IndexList, IndexSection, Cell, Header} from "mint-ui";
 Vue.component(DatetimePicker.name, DatetimePicker)
 Vue.component(IndexList.name, IndexList)
 Vue.component(IndexSection.name, IndexSection)
 Vue.component(Cell.name, Cell)
+Vue.component(Header.name, Header)
+
 import "mint-ui/lib/style.css";
 
 // FastClick.attach(document.body)

@@ -70,4 +70,8 @@ export default {
     background-color: #F7F7FA;
     right: 0;
 }
+.mint-header {
+  background-color:#2B2A30;
+  height: 44px;
+}
 </style>

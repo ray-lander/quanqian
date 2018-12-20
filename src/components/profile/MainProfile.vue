@@ -53,12 +53,12 @@
 				</div>
 				<div class="weui-cell__ft"></div>
 			</div>
-			<div class="weui-cell weui-cell_access">
+			<router-link tag="div" to="/index/profile/sendtaskmanagement" class="weui-cell weui-cell_access">
 				<div class="weui-cell__bd">
 					<span style="vertical-align: middle">延时发送管理</span>
 				</div>
 				<div class="weui-cell__ft"></div>
-			</div>
+			</router-link>
 		</div>
 		<!-- 提示框 -->
 		<div id="toast" style="opacity: 0; display: none;">
