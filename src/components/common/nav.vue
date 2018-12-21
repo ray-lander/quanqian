@@ -10,7 +10,7 @@
 			>
 				<span style="display: inline-block;position: relative;">
 					<span class="weui-tabbar__icon iconfont icon-pengyouquan"></span>
-					<span class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</span>
+					<!-- <span class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</span> -->
 				</span>
 				<p class="weui-tabbar__label">朋友圈</p>
 			</router-link>
@@ -33,7 +33,7 @@
 			>
 				<span style="display: inline-block;position: relative;">
 					<span class="weui-tabbar__icon iconfont icon-xiangce"></span>
-					<span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
+					<!-- <span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span> -->
 				</span>
 				<p class="weui-tabbar__label">素材库</p>
 			</router-link>
@@ -64,8 +64,6 @@
 			font-weight: 800;
 		}
 	}
-	.weui-tabbar__label {
-		// font-size: 1.25rem;
-	}
+	
 }
 </style>

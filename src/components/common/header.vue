@@ -1,7 +1,7 @@
 <template>
 	<div class="header_page">
 	
-		<mt-header fixed title="圈钱宝">
+		<mt-header fixed :title="$store.state.currentPageName">
 			<a
 				href="javascript:;"
 				slot="left"
@@ -18,8 +18,16 @@
 		name: "Header",
 		data() {
 			return {
+				pathName: '',
 				show_back: ['MomentsList','ReleaseNew','MyCollection','MainProfile']
-			};
+			}
+		},
+		watch: {
+			// 监听 $route 为页面设置不同的标题
+			$route(to, from) {
+				this.$store.commit("setPageName", to.meta.title);
+				
+			}
 		}
 	
 	};

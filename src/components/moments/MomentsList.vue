@@ -41,6 +41,12 @@
 <script>
 	import momentRow from "../common/momentRow.vue"
 	export default {
+		data(){
+			return {
+				pageName: '圈钱宝',			
+
+			}
+		},
 		components: {
 			momentRow
 		}

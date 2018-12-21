@@ -89,6 +89,7 @@
 		name: "MainProfile",
 		data() {
 			return {
+				pageName: '圈钱宝',	
 				showQrcode: false
 			};
 		},

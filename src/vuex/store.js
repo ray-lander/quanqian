@@ -6,8 +6,8 @@ import getters from "./getters"
 Vue.use(Vuex)
 
 const state = {
-  currentPageName: "微信",
-  headerStatus: true,
+  currentPageName: "圈钱宝",
+  isLogin: 0,
 }
 
 export default new Vuex.Store({

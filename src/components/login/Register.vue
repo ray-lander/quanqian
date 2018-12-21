@@ -54,7 +54,7 @@
     name: "Register",
     data(){
       return {
-
+				pageName: '注册'
       }
     }
   };

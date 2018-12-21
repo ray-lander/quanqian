@@ -1,10 +1,10 @@
 <template>
 	<div class="release_page">
-		<div>选择发布朋友圈的微信账号，可多选</div>
+		<div class="page_tit">选择发布朋友圈的微信账号，可多选</div>
 		<div class="release_header clearfix">
 			<div class="fl user_img">
 				<input type="checkbox">
-				<img  src="../../assets/img/666.jpg" alt>
+				<img src="../../assets/img/666.jpg" alt>
 				<p>西西妹</p>
 			</div>
 			<div class="fl user_img">
@@ -98,19 +98,31 @@
 						<input type="checkbox" :checked="userDefind" :disabled="reComment">
 						<span :class="[reComment?'readonly':'']">自定义时间</span>
 					</div>
-					<div class="time_box" :class="[reComment?'readonly':'']" @click="openPicker">{{pickerValue | date}}</div>
+					<div
+						class="time_box"
+						:class="[reComment?'readonly':'']"
+						@click="openPicker"
+					>{{pickerValue | date}}</div>
 				</div>
-				
-				<div class="time_row" >
+
+				<div class="time_row">
 					<div class="now_tit" @click="reCommentFn">
 						<input type="checkbox" :checked="reComment" :disabled="userDefind">
 						<span :class="[userDefind?'readonly':'']">推荐时间</span>
 					</div>
 					<div class="time_chioce clearfix">
-						<input class="time_one" :class="[userDefind?'readonly':'']" type="text" value="07:00-08:30" readonly="readonly">
+						<ul class="clearfix">
+							<li
+								v-for="(item,index) in this.topicdata"
+								:key="index"
+								:class="{'active':ind === index&&!userDefind}"
+								@click="getTime(item,index)"
+							>{{item.time}}</li>
+						</ul>
+						<!-- <input class="time_one" :class="[userDefind?'readonly':'']" type="text" value="07:00-08:30" readonly="readonly">
 						<input class="time_two" :class="[userDefind?'readonly':'']" type="text" value="11:00-13:30" readonly="readonly">
 						<input class="time_three" :class="[userDefind?'readonly':'']" type="text" value="17:00-19:30" readonly="readonly">
-						<input class="time_four" :class="[userDefind?'readonly':'']" type="text" value="21:00-22:30" readonly="readonly">
+						<input class="time_four" :class="[userDefind?'readonly':'']" type="text" value="21:00-22:30" readonly="readonly">-->
 					</div>
 				</div>
 			</div>
@@ -128,7 +140,10 @@
 					</div>
 					<div class="now_tit" @click="randomDelay=!randomDelay">
 						<input type="checkbox" :checked="!randomDelay">
-						<span :class="[randomDelay?'readonly':'']">统一延时3s</span>
+						<span :class="[randomDelay?'readonly':'']">
+							统一延时
+							<input :readonly="randomDelay" class="second_num" type="text">秒
+						</span>
 					</div>
 				</div>
 			</div>
@@ -136,16 +151,19 @@
 			<div class="delay_love">
 				<div class="now_tit" @click="this.delayLikeFn">
 					<input type="checkbox" :checked="delayLike" :disabled="userDefind">
-					<span  :class="[userDefind?'readonly':'']">延时点赞</span>
+					<span :class="[userDefind?'readonly':'']">延时点赞</span>
 				</div>
 				<div class="now_news" v-show="delayLike">
-					<div class="now_tit"  @click="randomLike=!randomLike">
+					<div class="now_tit" @click="randomLike=!randomLike">
 						<input type="checkbox" :checked="randomLike">
 						<span :class="[!randomLike?'readonly':'']">随机点赞（朋友圈点赞的15s）</span>
 					</div>
-					<div class="now_tit"  @click="randomLike=!randomLike">
+					<div class="now_tit" @click="randomLike=!randomLike">
 						<input type="checkbox" :checked="!randomLike">
-						<span :class="[randomLike?'readonly':'']">统一延时3s</span>
+						<span :class="[randomLike?'readonly':'']">
+							统一延时
+							<input :readonly="randomLike" class="second_num" type="text">秒
+						</span>
 					</div>
 				</div>
 			</div>
@@ -159,7 +177,7 @@
 </template>
 <script>
 	import $ from "jquery/dist/jquery.min";
-	
+
 	export default {
 		name: "ReleaseNew",
 		data() {
@@ -178,6 +196,13 @@
 				reComment: false,
 				randomDelay: true,
 				randomLike: true,
+				topicdata: [
+					{ time: "07:00-08:30", activeClass: "0" },
+					{ time: "11:00-13:00", activeClass: "1" },
+					{ time: "17:30-19:30", activeClass: "2" },
+					{ time: "21:00-22:30", activeClass: "3" }
+				],
+				ind: ""
 			};
 		},
 
@@ -236,51 +261,59 @@
 				this.clickOver = false;
 			},
 			openPicker() {
-				if(this.reComment){
-					return
+				if (this.reComment) {
+					return;
 				}
 				this.$refs.picker.open();
 			},
 			// 自定义时间
-			userDefindFn(){
-				if(this.reComment){
-					return
+			userDefindFn() {
+				if (this.reComment) {
+					return;
 				}
-				this.userDefind = !this.userDefind
-				if(this.userDefind == false){
-					this.reComment = true
-				}else {
-					this.reComment = false
-					this.delayComments = false
-					this.delayLike = false
+				this.userDefind = !this.userDefind;
+				if (this.userDefind == false) {
+					this.reComment = true;
+				} else {
+					this.reComment = false;
+					this.delayComments = false;
+					this.delayLike = false;
 				}
 			},
 			// 推荐时间
-			reCommentFn(){
-				if(this.userDefind){
-					return
+			reCommentFn() {
+				if (this.userDefind) {
+					return;
 				}
-				this.reComment = !this.reComment
-				if(this.reComment == false){
-					this.userDefind = true
-				}else {
-					this.userDefind = false
+				this.reComment = !this.reComment;
+				if (this.reComment == false) {
+					this.userDefind = true;
+				} else {
+					this.userDefind = false;
 				}
 			},
-			delayCommentsFn(){
+			delayCommentsFn() {
 				// console.log(this.userDefind)
-				if(this.userDefind){
-					return
+				if (this.userDefind) {
+					return;
 				}
-				this.delayComments = !this.delayComments
+				this.delayComments = !this.delayComments;
 			},
-			delayLikeFn(){
-				if(this.userDefind){
+			delayLikeFn() {
+				if (this.userDefind) {
+					return;
+				}
+				this.delayLike = !this.delayLike;
+			},
+			//获取点击的对应索引，
+			getTime(item, index) {
+				if(this.userDefind) {
 					return
 				}
-				this.delayLike = !this.delayLike
+				this.ind = index;
+				console.log("点击获取的时间是：" + item.time)
+				console.log(index)
 			}
-
 		},
 		mounted() {
 			this.initUploader();
@@ -288,6 +321,15 @@
 	};
 </script>
 <style scoped lang="less">
+	.page_tit {
+		padding-left: 10px;
+	}
+	.second_num {
+		border: 1px solid #999;
+		width: 40px;
+		height: 25px;
+		border-radius: 3px;
+	}
 	.release_header {
 		padding: 0.625rem 0.3125rem;
 		border-bottom: 1px solid #ccc;
@@ -340,18 +382,13 @@
 	.now_tit {
 		height: 30px;
 		width: 100%;
-		padding: 0 10px;
+		// padding: 0 10px;
 		line-height: 30px;
 		box-sizing: border-box;
 	}
 	.time_row {
 		width: 85%;
 		margin: 0 auto;
-		// &.read_only {
-		// 	input {
-
-		// 	}
-		// }
 	}
 	.sub_btn {
 		padding: 10px 60px;
@@ -372,9 +409,9 @@
 		width: 100%;
 		.weui-btn {
 			width: 45%;
-			font-size: 15px;
-			margin-right: 8px;
-			margin-left: 8px;
+			font-size: 0.9375rem;
+			margin-right: 0.5rem;
+			margin-left: 0.5rem;
 			margin-top: 0;
 		}
 	}
@@ -393,7 +430,7 @@
 		padding: 0.3125rem 0.625rem;
 	}
 	.time_box {
-		height: 26px;
+		height: 1.625rem;
 		width: 77%;
 		border: 1px solid #ccc;
 		margin: 0 auto;
@@ -402,15 +439,20 @@
 		margin-bottom: 3px;
 	}
 	.time_chioce {
-		input {
-			// display: block;
-			// float: left;
-			width: 45%;
+		width: 81%;
+		margin: 0 auto;
+		li {
+			width: 42%;
 			text-align: center;
-			margin: 3px 5px;
+			margin: 0.1875rem 0.3125rem;
 			border: 1px solid #ccc;
 			border-radius: 3px;
-			padding: 3px 0;
+			list-style: none;
+			padding: 0.1875rem 0;
+			float: left;
+		}
+		.active {
+			background-color: #989fcb;
 		}
 	}
 	input.readonly,

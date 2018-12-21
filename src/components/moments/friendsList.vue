@@ -22,6 +22,7 @@
 		name: "FriendsList",
 		data() {
 			return {
+				pageName: '好友列表',
 				id: 11
 			};
 		},

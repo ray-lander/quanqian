@@ -24,8 +24,14 @@
 </template>
 <script>
 	export default {
-		name: "SendtaskManagement"
-	};
+		name: "SendtaskManagement",
+		data(){
+			return {
+				pageName: '发送记录管理',	
+
+			}
+		}
+	}
 </script>
 <style scoped lang="less">
 	.weui-media-box_appmsg .weui-media-box__thumb {

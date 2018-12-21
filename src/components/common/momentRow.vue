@@ -65,38 +65,18 @@
 						class="thumbnail"
 					>
 						<a
-							href="https://sinacloud.net/vue-wechat/images/headers/yehua.jpg"
+							:href="imgSrc"
 							itemprop="contentUrl"
 							data-size="400x400"
 						>
 							<img
-								src="https://sinacloud.net/vue-wechat/images/headers/yehua.jpg"
+								:src="imgSrc"
 								itemprop="thumbnail"
 								alt="Image description"
 							>
 						</a>
 						<figcaption itemprop="caption description">Image 01</figcaption>
-					</figure>
-
-					<figure
-						itemprop="associatedMedia"
-						itemscope
-						itemtype="http://schema.org/ImageObject"
-						class="thumbnail"
-					>
-						<a
-							href="https://sinacloud.net/vue-wechat/images/headers/yehua.jpg"
-							itemprop="contentUrl"
-							data-size="400x400"
-						>
-							<img
-								src="https://sinacloud.net/vue-wechat/images/headers/yehua.jpg"
-								itemprop="thumbnail"
-								alt="Image description"
-							>
-						</a>
-						<figcaption itemprop="caption description">Image 02</figcaption>
-					</figure>
+					</figure>				
 				</div>
 				<!-- 资料条 -->
 				<div class="toolbar">
@@ -153,8 +133,9 @@
 	export default {
 		data() {
 			return {
-				actionBtn: false
-			};
+				actionBtn: '',
+				imgSrc: ['https://sinacloud.net/vue-wechat/images/headers/yehua.jpg']
+			}
 		},
 		methods: {
 			initPhotoSwipeFromDOM(gallerySelector) {
@@ -169,8 +150,7 @@
 						linkEl,
 						size,
 						item;
-					// console.log(thumbElements)
-					// console.log(numNodes)
+				
 					// 遍历相册
 					for (var i = 0; i < numNodes; i++) {
 						figureEl = thumbElements[i];

@@ -48,7 +48,7 @@
     name: "Register",
     data(){
       return {
-
+				pageName: '忘记密码'
       }
     }
   };

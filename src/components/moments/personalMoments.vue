@@ -16,7 +16,7 @@
 	export default {
     data(){
       return{
-
+				pageName: '圈钱宝'
       }
     },
     methods: {
