@@ -19,20 +19,20 @@ Vue.config.productionTip = false
 
 export default new Router({
   routes: [
-    { path: '/', redirect: '/index/moments/momentslist' },
+    { path: '/', redirect: '/index/login' },
     {
-      path: '/index', redirect: '/index/moments/momentslist', name: 'Index', component: Index,
+      path: '/index', redirect: '/index/login', name: 'Index', component: Index,
       children: [
         // 朋友圈
         { path: '/index/moments/momentslist', name: 'MomentsList', component: MomentsList, meta: { title: '圈钱宝', auth: true } },
         { path: '/index/moments/friendslist', name: 'FriendsList', component: FriendsList, meta: { title: '好友列表' } },
         { path: '/index/moments/personalmoments', name: 'personalMoments', component: PersonalMoments, meta: { title: '圈钱宝' } },
         // 发布
-        { path: '/index/release/releasenew', name: 'ReleaseNew', component: ReleaseNew, meta: { title: '圈钱宝' } },
+        { path: '/index/release/releasenew', name: 'ReleaseNew', component: ReleaseNew, meta: { title: '圈钱宝', auth: true  } },
         //素材
-        { path: '/index/materialcollection/mycollection', name: 'MyCollection', component: MyCollection, meta: { title: '圈钱宝' } },
+        { path: '/index/materialcollection/mycollection', name: 'MyCollection', component: MyCollection, meta: { title: '圈钱宝', auth: true  } },
         //个人中心
-        { path: '/index/profile/mainprofile', name: 'MainProfile', component: MainProfile, meta: { title: '圈钱宝' } },
+        { path: '/index/profile/mainprofile', name: 'MainProfile', component: MainProfile, meta: { title: '圈钱宝', auth: true  } },
         { path: '/index/profile/sendtaskmanagement', name: 'SendtaskManagement', component: SendtaskManagement, meta: { title: '发送任务管理' } },
         // 登录
         { path: '/index/MobPage', name: 'MobPage', component: MobPage, meta: { title: '首页' } },

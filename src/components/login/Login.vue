@@ -47,35 +47,33 @@
 		},
 		methods: {
 			loginIn() {
-				// if (this.telNum == "") {
-        //   this.$toast("请输入手机号码")
-        //   return
-				// } else if (!/^1[34578]\d{9}$/.test(this.telNum)) {
-				// 	this.$toast("手机号码格式不正确");
-				// 	return
-				// } else if (this.passNum == "") {
-        //   this.$toast("请输入密码")
-        //   return
-				// } else {
-        //   let param = {
-        //    password: '1234567',
-        //    username: '13917190637'
-        //   }
-				// 	GetToken(param).then(res => {
-				// 		console.log(res)
-				// 	})
-        // }
-        let param = {
-           password: '1234567',
-           username: '13917190637'
-          }
+				if (this.telNum == "") {
+					this.$toast("请输入手机号码");
+					return;
+				} else if (!/^1[34578]\d{9}$/.test(this.telNum)) {
+					this.$toast("手机号码格式不正确");
+					return;
+				} else if (this.passNum == "") {
+					this.$toast("请输入密码");
+					return;
+				} else {
+					let param = {
+						username: this.telNum,
+						password: this.passNum
+					};
 					GetToken(param).then(res => {
-            console.log(res)
-            if(res.status == 200){
-              this.$store.commit('changeLogin', 1) 
-              console.log(this.$store.state.isLogin)
-            }
+						// console.log(res)
+						if (res.status == 200) {
+							this.$store.commit("changeLogin", 1)
+							if (res.data.code == 1) {
+								sessionStorage.setItem("token", res.data.data.token);
+								this.$toast("登陆成功");
+								this.$router.push("/index/moments/momentslist")
+							}
+						}
 					})
+				}
+				
 			}
 		}
 	};

@@ -6,7 +6,7 @@
 				href="javascript:;"
 				slot="left"
 				@click="$router.go(-1)"
-				v-show="show_back.indexOf($route.name) == -1"
+				v-show="show_back.indexOf($route.name) == -1 && $route.path.indexOf('login') == -1"
 			>
 				<span class="iconfont icon-tubiaozhizuo-"></span>
 			</a>

@@ -13,16 +13,16 @@ import './lib/iconfont/iconfont.css'
 import './lib/base.css'
 import './lib/rem'
 import './filter/data'
-import { DatetimePicker, IndexList, IndexSection, Cell, Header, Toast} from "mint-ui";
-Vue.component(Toast.name, Toast)
-Vue.component(DatetimePicker.name, DatetimePicker)
-Vue.component(IndexList.name, IndexList)
-Vue.component(IndexSection.name, IndexSection)
-Vue.component(Cell.name, Cell)
-Vue.component(Header.name, Header)
-// import MintUI from 'mint-ui'
+// import { DatetimePicker, IndexList, IndexSection, Cell, Header, Toast} from "mint-ui";
+// Vue.component(Toast.name, Toast)
+// Vue.component(DatetimePicker.name, DatetimePicker)
+// Vue.component(IndexList.name, IndexList)
+// Vue.component(IndexSection.name, IndexSection)
+// Vue.component(Cell.name, Cell)
+// Vue.component(Header.name, Header)
+import MintUI from 'mint-ui'
 import "mint-ui/lib/style.css"
-// Vue.use(MintUI)
+Vue.use(MintUI)
 // Vue.$toast = Vue.prototype.$toast = Toast;
 FastClick.attach(document.body)
 Vue.config.productionTip = false
@@ -38,10 +38,13 @@ new Vue({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth)) {
     // 对路由进行验证     
-    if (store.state.isLogin == 1) { // 已经登陆       
-      next()   // 正常跳转到你设置好的页面     
+    const token = sessionStorage.getItem('token')
+    if (token) { // 已经登陆       
+      next()   // 正常跳转到你设置好的页面   
+      // console.log(token)  
     }
     else {
+      console.log("未登录")
       // 未登录则跳转到登陆界面，query:{ Rurl: to.fullPath}表示把当前路由信息传递过去方便登录后跳转回来；
       next({ path: '/index/login', query: { Rurl: to.fullPath } })
     }
